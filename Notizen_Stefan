@@ -9,3 +9,9 @@
 # API ausprobieren, wenn das klappt.
 # Was für daten bekommen wir? Wie sieht es aus mit API calls? 
 # 10'000 pro Tag
+
+
+# API funktioniert mit latitude und longitude
+# Daten von Flughäfen eingeben und so wetterdaten ziehen
+# geht leider nur 1x pro koordinate, also wir müssten uns auf ein paar orte beschränken, sonst ziehen wir uns die daten immer selbst
+# evtl. kann man mit python eine list machen mit allen latitude und longitude und die so durch loopen lassen.
