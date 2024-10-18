@@ -5,7 +5,4 @@ The scope is about extracting historical weather and aviation data, training a m
 to rpedict future cancellations and delays based on airport locations.
 
 
-### Contributors
-Andre Kuhn, andre.kuhn@stud.hslu.ch
-Oliver Heisel, oliver.heisel@stud.hslu.ch
-Stefan Durrer, stefan.durrer@stud.hslu.ch
+
