@@ -18,6 +18,9 @@ Lambda Layers ermöglichen es, externe Bibliotheken in deiner Lambda-Funktion zu
 
 Folge der Vorlesung (Session Recording) bei der Session "Data Ingestion".
 
+Code:
+https://gist.github.com/jose0628/377f7a24650844474155f8cddfb6f665
+
 > Anmerkung: ChatGPT schlägt vor, dass man die zip-Datei lokal erstellt.
 
 ## 3. Lambda-Funktion erstellen
