@@ -1,0 +1,83 @@
+import os
+import json
+import requests
+import boto3
+from datetime import datetime, timedelta
+
+def lambda_handler(event, context):
+    # API-Schlüssel und S3-Bucket-Name aus Umgebungsvariablen abrufen
+    api_key = os.environ.get("API_KEY", "868be0-405487")
+    bucket_name = os.environ.get("S3_BUCKET_NAME", "historicflightdata1")
+    
+    # Parameter aus dem Event-Objekt abrufen
+    iata_codes = event.get("iata_codes")
+    type_ = event.get("type", "departure")         # Standardmäßig "departure"
+    start_date = event.get("start_date")           # Startdatum im Format YYYY-MM-DD
+    end_date = event.get("end_date")               # Enddatum im Format YYYY-MM-DD
+
+    # Überprüfen, ob Start- und Enddatum vorhanden sind
+    if not start_date or not end_date:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"message": "Startdatum und Enddatum sind erforderlich."})
+        }
+
+    # Start- und Enddaten in Datumsobjekte umwandeln
+    try:
+        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
+        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
+    except ValueError:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"message": "Ungültiges Datumsformat. Verwenden Sie YYYY-MM-DD."})
+        }
+
+    # Liste der Daten zwischen Start- und Enddatum erstellen
+    date_list = [(start_date_obj + timedelta(days=i)).strftime("%Y-%m-%d") 
+                 for i in range((end_date_obj - start_date_obj).days + 1)]
+
+    # API-Endpunkt definieren
+    base_url = "https://aviation-edge.com/v2/public/flightsHistory"
+    
+    # S3-Client initialisieren
+    s3_client = boto3.client('s3')
+
+    # Über jeden IATA-Code und jedes Datum iterieren
+    for date_from in date_list:
+        for code in iata_codes:
+            # Parameter für die API-Anfrage festlegen
+            params = {
+                "key": api_key,
+                "code": code,
+                "type": type_,
+                "date_from": date_from
+            }
+
+            # Einzigartigen Dateinamen basierend auf Datum, IATA-Code und Typ erstellen
+            file_name = f"{date_from.replace('-', '')}_{code}_{type_}.json"
+
+            # API-Anfrage durchführen
+            try:
+                response = requests.get(base_url, params=params)
+                response.raise_for_status()  # Überprüfen, ob die Anfrage erfolgreich war
+
+                # Antwortdaten in S3 mit dem eindeutigen Dateinamen speichern
+                s3_client.put_object(
+                    Bucket=bucket_name,
+                    Key=file_name,
+                    Body=json.dumps(response.json())
+                )
+
+                print(f"Daten für {code} am {date_from} als {file_name} gespeichert.")
+
+            except requests.exceptions.RequestException as e:
+                print(f"API-Anfrage für {code} am {date_from} fehlgeschlagen: {str(e)}")
+
+            except boto3.exceptions.Boto3Error as e:
+                print(f"Fehler beim Speichern der Daten in S3 für {code} am {date_from}: {str(e)}")
+
+    # Erfolgsmeldung zurückgeben
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"message": f"Daten von {start_date} bis {end_date} wurden verarbeitet und in S3 gespeichert."})
+    }

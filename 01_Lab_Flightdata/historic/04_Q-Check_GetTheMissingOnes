@@ -1,0 +1,73 @@
+import os
+import json
+import requests
+import boto3
+from datetime import datetime
+
+def lambda_handler(event, context):
+    # API-Schlüssel und S3-Bucket-Name aus Umgebungsvariablen abrufen
+    api_key = os.environ.get("API_KEY", "f0e779-b803c3")
+    bucket_name = os.environ.get("S3_BUCKET_NAME", "historicflightdata1")
+    
+    # Liste der fehlenden Dateien aus dem Event abrufen
+    missing_files = event.get("missing_files", [])
+    
+    if not missing_files:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"message": "Die Liste der fehlenden Dateien ist leer oder nicht vorhanden."})
+        }
+    
+    # API-Endpunkt definieren
+    base_url = "https://aviation-edge.com/v2/public/flightsHistory"
+    
+    # S3-Client initialisieren
+    s3_client = boto3.client('s3')
+    
+    # Über die fehlenden Dateien iterieren
+    for file_name in missing_files:
+        try:
+            # Dateinamen parsen, um Datum, IATA-Code und Typ zu extrahieren
+            # Beispiel-Dateiname: 20231101_AMS_departure.json
+            name_parts = file_name.replace('.json', '').split('_')
+            if len(name_parts) != 3:
+                print(f"Ungültiger Dateiname: {file_name}")
+                continue  # Zum nächsten Dateinamen springen
+            
+            date_str = name_parts[0]
+            code = name_parts[1]
+            type_ = name_parts[2]
+            
+            # Datum in das benötigte Format umwandeln (YYYY-MM-DD)
+            date_from = datetime.strptime(date_str, "%Y%m%d").strftime("%Y-%m-%d")
+            
+            # Parameter für die API-Anfrage festlegen
+            params = {
+                "key": api_key,
+                "code": code,
+                "type": type_,
+                "date_from": date_from
+            }
+            
+            # API-Anfrage durchführen
+            response = requests.get(base_url, params=params)
+            response.raise_for_status()  # Überprüfen, ob die Anfrage erfolgreich war
+            
+            # Antwortdaten in S3 mit dem ursprünglichen Dateinamen speichern
+            s3_client.put_object(
+                Bucket=bucket_name,
+                Key=file_name,
+                Body=json.dumps(response.json())
+            )
+            
+            print(f"Daten für {code} am {date_from} als {file_name} gespeichert.")
+        
+        except Exception as e:
+            print(f"Fehler bei der Verarbeitung von {file_name}: {str(e)}")
+            continue  # Zum nächsten Dateinamen springen
+    
+    # Erfolgsmeldung zurückgeben
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"message": "Fehlende Dateien wurden verarbeitet und in S3 gespeichert."})
+    }

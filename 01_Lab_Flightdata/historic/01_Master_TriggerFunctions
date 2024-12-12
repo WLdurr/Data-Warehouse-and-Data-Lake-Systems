@@ -1,0 +1,66 @@
+import json
+import boto3
+from datetime import datetime, timedelta
+
+def lambda_handler(event, context):
+    # Parameter aus dem Event-Objekt abrufen
+    start_date = event.get("start_date")  # Startdatum im Format YYYY-MM-DD
+    end_date = event.get("end_date")      # Enddatum im Format YYYY-MM-DD
+    iata_codes = event.get("iata_codes") 
+    type_ = event.get("type", "departure")  # Standardmäßig "departure"
+
+     # Überprüfen, ob Start- und Enddatum vorhanden sind
+    if not start_date or not end_date:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"message": "Startdatum und Enddatum sind erforderlich."})
+        }
+
+    # Start- und Enddaten in Datumsobjekte umwandeln
+    try:
+        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
+        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
+    except ValueError:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"message": "Ungültiges Datumsformat. Verwenden Sie YYYY-MM-DD."})
+        }
+
+    # Liste der Monatsintervalle erstellen
+    date_ranges = []
+    current_date = start_date_obj.replace(day=1)
+    while current_date <= end_date_obj:
+        month_start = current_date
+        next_month = (current_date.replace(day=28) + timedelta(days=4)).replace(day=1)
+        month_end = next_month - timedelta(days=1)
+        if month_end > end_date_obj:
+            month_end = end_date_obj
+        date_ranges.append((month_start.strftime("%Y-%m-%d"), month_end.strftime("%Y-%m-%d")))
+        current_date = next_month
+
+    # Lambda-Client initialisieren
+    lambda_client = boto3.client('lambda')
+
+    # Subfunktionen nacheinander aufrufen, ohne auf deren Abschluss zu warten
+    for date_range in date_ranges:
+        payload = {
+            "start_date": date_range[0],
+            "end_date": date_range[1],
+            "iata_codes": iata_codes,
+            "type": type_
+        }
+
+        try:
+            response = lambda_client.invoke(
+                FunctionName='02_Sub_GetDataFromApi',  # Ersetzen Sie dies durch den tatsächlichen Namen Ihrer Subfunktion
+                InvocationType='Event',  # Asynchroner Aufruf
+                Payload=json.dumps(payload)
+            )
+            print(f"Subfunktion für Zeitraum {date_range[0]} bis {date_range[1]} ausgelöst.")
+        except Exception as e:
+            print(f"Fehler beim Aufruf der Subfunktion für Zeitraum {date_range[0]} bis {date_range[1]}: {str(e)}")
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"message": "Alle Subfunktionen wurden asynchron ausgeloest."})
+    }

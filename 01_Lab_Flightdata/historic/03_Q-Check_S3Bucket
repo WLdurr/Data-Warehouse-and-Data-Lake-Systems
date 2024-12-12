@@ -1,0 +1,82 @@
+import json
+import boto3
+from datetime import datetime, timedelta
+
+def lambda_handler(event, context):
+    # S3 bucket name
+    bucket_name = 'historicflightdata1'
+    
+    # Extract parameters from the event
+    iata_codes = event.get("iata_codes", [])
+    type_ = event.get("type", "departure")
+    start_date_str = event.get("start_date")
+    end_date_str = event.get("end_date")
+    
+    # Validate input parameters
+    if not iata_codes or not start_date_str or not end_date_str:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"message": "Missing required parameters."})
+        }
+    
+    # Parse dates
+    try:
+        start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
+        end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
+    except ValueError:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"message": "Invalid date format. Use YYYY-MM-DD."})
+        }
+    
+    # Generate list of dates between start_date and end_date
+    delta = end_date - start_date
+    date_list = [(start_date + timedelta(days=i)).strftime("%Y%m%d") for i in range(delta.days + 1)]
+    
+    # Expected file names
+    expected_files = []
+    for date in date_list:
+        for code in iata_codes:
+            file_name = f"{date}_{code}_{type_}.json"
+            expected_files.append(file_name)
+    
+    # Initialize S3 client
+    s3_client = boto3.client('s3')
+    
+    # Retrieve list of files in the bucket
+    existing_files = []
+    continuation_token = None
+    while True:
+        if continuation_token:
+            response = s3_client.list_objects_v2(Bucket=bucket_name, ContinuationToken=continuation_token)
+        else:
+            response = s3_client.list_objects_v2(Bucket=bucket_name)
+        
+        if 'Contents' in response:
+            for obj in response['Contents']:
+                existing_files.append(obj['Key'])
+        
+        if response.get('IsTruncated'):
+            continuation_token = response.get('NextContinuationToken')
+        else:
+            break
+    
+    # Determine missing files
+    missing_files = [file for file in expected_files if file not in existing_files]
+    
+    # Print missing files
+    if missing_files:
+        print("Missing files:")
+        for file in missing_files:
+            print(file)
+    else:
+        print("All expected files are present in the S3 bucket.")
+    
+    # Return the list of missing files in the response
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "message": "Check completed.",
+            "missing_files": missing_files
+        })
+    }
