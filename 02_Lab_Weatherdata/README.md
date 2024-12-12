@@ -28,5 +28,9 @@ Lambda export:
 
 ### Push historic weather data to the Lab that uses SageMaker
 code: weather_data_to_sagemaker.py
+Lambda export:
+
+### Push forecast weather data to the Lab that uses SageMaker
+code: weather_forecast_to_sagemaker.py
 Lambda export: 
 
