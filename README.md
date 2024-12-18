@@ -13,10 +13,10 @@ to predict future cancellations and delays based on airport locations.
 3. [FRA Frankfurt](https://oliverheisel.grafana.net/public-dashboards/22d72ad0730147e9a34cb91847123919)
 4. [LHR London](https://oliverheisel.grafana.net/public-dashboards/026355ddb94649589cef73c6a34f1c07)
 5. [ZRH Zürich](https://oliverheisel.grafana.net/public-dashboards/6014e6bbbce04360831691730bf5ee5f)
-6. [Overview](https://oliverheisel.grafana.net/public-dashboards/c5d09ed6185b4d3584a3851420b0d31e) (only works internally because of the template variable)
+6.
 
 ### Statistics
-- [Flight Stats](https://oliverheisel.grafana.net/public-dashboards/6014e6bbbce04360831691730bf5ee5f)
+[Flight Stats](https://oliverheisel.grafana.net/public-dashboards/9ff89ab776034694aa3f512bd5d97d76)
 
 
 ## Architecture
