@@ -21,4 +21,4 @@ to predict future cancellations and delays based on airport locations.
 ## Architecture
 The scripts for each lab can be found in their respective folders. The representation deviates from the actual Lambda function and script, as adjustments were necessary due to the limitations of the labs.
 
-![Architecture Diagram](ReadmeFiles/Architecture.png)
+![Architecture Diagram](ReadmeFiles/Architecture2.png)
