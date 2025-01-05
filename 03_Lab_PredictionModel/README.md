@@ -1,5 +1,3 @@
-# README
-
 This folder contains all the code necessary for generating training data and making predictions in AWS. Below is the folder structure with a brief description of each file.
 
 ---
