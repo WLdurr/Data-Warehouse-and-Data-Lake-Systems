@@ -12,7 +12,7 @@ Files related to preprocessing and managing data in the data lab.
   Transforms weather data by tasks like recoding airport codes into numeric values.
 
 - **`2_send_to_sagemaker_lab.py`**  
-  Transfers transformed data to the Sagemaker lab for further processing.
+  Transfers transformed data to the Sagemaker lab for prediction.
 
 - **`3_make_prediction_delay.py`**  
   Calls the machine learning model endpoint to make predictions based on input data.
