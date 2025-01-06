@@ -22,20 +22,20 @@ The scripts for each lab can be found in their respective folders. The represent
 
 ![Architecture Diagram](ReadmeFiles/Architecture2.png)
 
-# How to Import and Run AWS Lambda Functions
+## How to Import and Run AWS Lambda Functions
 
 To set up the system, follow these sequential steps. This guide will help you import and execute Lambda scripts in your AWS environment.
 
-## Prerequisites
+### Prerequisites
 1. Start by downloading all the necessary files from this repository. Each Lambda script is located in one of the following folders:
    - **01_PrepareEnvironment**
    - **02_SetupDatabase**
    - **03_ConfigureServices**
    - **04_FinalizeDeployment**
 
-   It is essential to proceed sequentially through these folders to set up the system correctly.
+   Each folder contains **multiple scripts**. The structure of the scripts and their intended purpose can be found within each folder. It is essential to proceed sequentially through the folders and scripts to set up the system correctly.
 
-## Steps to Import and Run a Lambda Function
+### Steps to Import and Run a Lambda Function
 1. **Log in to AWS**:
    - Navigate to the **Lambda Console** in your AWS Management Console.
 
@@ -49,7 +49,7 @@ To set up the system, follow these sequential steps. This guide will help you im
    - Select **"Import function"** from the dropdown menu.
 
 4. **Upload the Script**:
-   - In the import dialog, choose the **ZIP file** of the Lambda function you want to run. These ZIP files can be found in the respective folders of this repository.
+   - In the import dialog, choose the **ZIP file** of the Lambda function you want to run. Each folder contains ZIP files for the individual scripts. Select the one you want to execute.
 
 5. **Review and Save**:
    - Ensure that all the settings (runtime, permissions, etc.) are correctly configured.
@@ -60,17 +60,18 @@ To set up the system, follow these sequential steps. This guide will help you im
    - Create a test event and populate it with any required parameters for the function.
    - Click **"Test"** to execute the Lambda function.
 
-7. **Repeat for Other Functions**:
+7. **Repeat for Other Scripts**:
    - Repeat the steps above for each Lambda script in the repository, ensuring they are executed in the correct sequence:
-     1. **01_PrepareEnvironment**
-     2. **02_SetupDatabase**
-     3. **03_ConfigureServices**
-     4. **04_FinalizeDeployment**
+     1. **01_PrepareEnvironment**: Complete all scripts in this folder first.
+     2. **02_SetupDatabase**: Proceed to the scripts in this folder.
+     3. **03_ConfigureServices**: Configure services using the scripts in this folder.
+     4. **04_FinalizeDeployment**: Finalize the setup with the scripts in this folder.
 
-## Important Notes
-- Each Lambda script has a specific purpose within the setup process. Be sure to follow the order provided in the repository to avoid errors.
+### Important Notes
+- Each folder contains **multiple scripts** designed for a specific part of the setup process. Review the structure and purpose of the scripts in each folder before proceeding.
+- Execute the scripts **sequentially** within each folder to ensure proper configuration.
 - Ensure that the necessary **IAM roles and permissions** are assigned to each Lambda function for it to run properly.
 
-By following these steps, you can import and run each Lambda script successfully to set up your system.
+By following these steps, you can import and run all Lambda scripts successfully to set up your system.
 
 Happy coding!
