@@ -43,7 +43,7 @@ Author: Stefan Durrer
 
 ---
 
-- `cloud9 envoronment.txt`
+- `cloud9 lambda layer.txt`
   - **Functionality**: This text file contains all commands used in the AWS EC2 Cloud9 instance (Linux 2023 environment) that have been used to create the custom lambda layer for the scripts in the folder /wrangling.
 
 
