@@ -1,7 +1,7 @@
 # This file handles the data transfer from an s3 bucket to the Postgres RDS.
 # Only the latest 5 transferred files are being pushed to RDS. All files stay in s3 for future development.
 # to make the code run, a custom lambda layer with packages psycopg2 is required (available in repo)
-# this code runs once per day rate(1 day)
+# this code runs every 3 hours
 
 import json
 import boto3
