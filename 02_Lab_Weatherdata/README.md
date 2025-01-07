@@ -24,22 +24,22 @@ Author: Stefan Durrer
 - **Scripts**:
   - `weather_data_to_sagemaker.py`
     - **Functionality**: Copies the historic weather data to the Lab where sagemaker resides (Lab 03), such that the other student can access the data. This file was manually triggered whenever needed.
-    - **Lambda File**: ``
+    - **Lambda File**: `copyhistoricweather-9de0cc8b-1756-4602-9860-30f0171cb11a.zip`
   - `weather_forecast_to_sagemaker.py`
     - **Functionality**: This file transfers forecast data to the sagemaker lab (Lab 03). This was used for testing and development. This function is inactive as of 08.01.2025.
-    - **Lambda File**: ``
+    - **Lambda File**: `copyweatherforecast-cf9134ce-3bf4-44e6-a4fc-6e059e5f4d4c.zip`
   - `weather_historic_to_s3_rds.py`
     - **Functionality**: This file transfers data from one lab to another, where the data lake is (s3 to s3) (Lab 04). This is needed to not run into credit limitations. 
-    - **Lambda File**: ``
+    - **Lambda File**: `weatherhistorictords-8644d030-4b17-4f70-9e56-d4a214be9791.zip`
   - `weather_forecast_to_s3_rds.py`
     - **Functionality**: This file transfers forecast data from one lab to another (triggered every 3 hours), where the data lake is (s3 to s3) (Lab 04). This is needed to not run into credit limitations. 
-    - **Lambda File**: ``
+    - **Lambda File**: `weatehrforecasttords-2200c9ae-91e3-4485-9d58-8f833b29d7c4.zip`
   - `life_flight_to_s3_rds.py`
     - **Functionality**: From Lab 01, live aviation data is transferred to Lab 02, to avoid credit limitations. This function transfers the live aviation data to the data lake in Lab 04.
-    - **Lambda File**: ``
+    - **Lambda File**: `flightlivetords-f77e9d7b-74fc-4e9a-abea-5b1980adc9cb.zip`
   - `historic_flight_to_s3_rds.py`
     - **Functionality**: From Lab 01, historic aviation data is transferred to Lab 02, to avoid credit limitations. This function transfers the historic aviation data to the data lake in Lab 04.
-    - **Lambda File**: ``
+    - **Lambda File**: `historicflighttords-757300d8-71d7-4af5-8aab-4a98152e56fa.zip`
 
 ---
 
