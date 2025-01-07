@@ -14,7 +14,7 @@ Author: Stefan Durrer
     - **Lambda File**: `forecastimport-1c3babbc-fbc1-40f9-8c91-5a87ae27abeb.zip`
   - `historic_weather_import.py`
     - **Functionality**: Fetches historic weather data for entire 2024, checks for completeness and saves data to s3 bucket. This function was only executed once to get enough data for the model training.
-    - **Lambda File**: ``
+    - **Lambda File**: `weatherimport-f176959c-6732-40f3-a462-5092f9a9b4d9.zip`
 
 ---
 
