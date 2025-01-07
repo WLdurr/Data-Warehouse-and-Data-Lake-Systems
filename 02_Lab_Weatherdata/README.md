@@ -11,7 +11,7 @@ Author: Stefan Durrer
 - **Scripts**:
   - `weather_forecast_import.py`
     - **Functionality**: Fetches live weather data from the API, checks for completeness, transforms data and saves it to s3 bucket. This function is triggered every 3 hours.
-    - **Lambda File**: ``
+    - **Lambda File**: `forecastimport-1c3babbc-fbc1-40f9-8c91-5a87ae27abeb.zip`
   - `historic_weather_import.py`
     - **Functionality**: Fetches historic weather data for entire 2024, checks for completeness and saves data to s3 bucket. This function was only executed once to get enough data for the model training.
     - **Lambda File**: ``
