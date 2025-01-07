@@ -2,7 +2,7 @@
 # Only one file is in the s3 bucket that gets overwritten each day
 # this file is being pushed to RDS
 # to make the code run, a custom lambda layer with packages psycopg2 is required (available in repo)
-# this code runs once per day rate(1 day)
+# this code runs every 3 hours
 
 import json
 import boto3
@@ -19,7 +19,6 @@ RDS_USER = 'postgres'
 RDS_PASSWORD = 'soa_2024'
 RDS_PORT = 5432
 
-
 # Function to connect to the RDS PostgreSQL database
 def connect_to_rds():
     try:
@@ -35,7 +34,6 @@ def connect_to_rds():
     except Exception as e:
         print(f"Error connecting to RDS: {str(e)}")
         raise
-
 
 # Lambda function handler
 def lambda_handler(event, context):
@@ -69,7 +67,7 @@ def lambda_handler(event, context):
                 input, timestamp, predicted_delay_tomorrow
             ) VALUES %s
         """
-
+        
         # Process and collect data for batch insertion
         all_data = []
         if flight_data_list:
