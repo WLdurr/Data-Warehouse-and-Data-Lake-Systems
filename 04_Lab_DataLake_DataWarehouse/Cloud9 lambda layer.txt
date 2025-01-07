@@ -1,0 +1,38 @@
+
+sudo dnf install python3.11-pip -y
+python3.11 -m pip install --user virtualenv
+mkdir folder
+cd folder
+virtualenv v-env --python=python3.11
+source ./v-env/bin/activate
+
+pip install pandas
+pip install numpy
+pip install requests
+pip install openmeteo_requests
+pip install requests_cache
+
+mkdir python
+cd python
+
+cp -r ../v-env/lib/python3.11/site-packages/* .
+cd ..
+
+zip -r my_custom_layer.zip python
+aws lambda publish-layer-version --layer-name my_custom_lambda_layer --zip-file fileb://my_custom_layer.zip --compatible-runtimes python3.11
+
+{
+    "Content": {
+        "Location": "https://prod-iad-c1-djusa-layers.s3.us-east-1.amazonaws.com/snapshots/115507105618/my_custom_lambda_layer-ea8edde4-d1b2-4e3b-8933-84dfdcd3ab32?versionId=jKgqus3mbvC2YwExKSvgBipkjr.HAkXi&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEMaCXVzLWVhc3QtMSJIMEYCIQDfljtElan%2BMI%2FDzBLQIBNRFSIlAx33%2BOiPQnMc5awAWQIhANE42%2FAj9JpWGOc2Ex%2FQ%2FC95QOahkPADTIVHBaunyUl6KrkFCCwQBBoMNDc5MjMzMDI1Mzc5IgykxMFpK01UjmpVknIqlgXs%2FcB9vpRX7usckf%2FpRoGKhctu9ntqPQRN0O%2FwtFqEna5nUJUfmZsY%2F4SawZJsO0AYrG67RLgwGTRjLd0Ng6siYKlKvXNBMC7r7oDUcLa0hKtZmKIzizFG7R3%2BD3iievFQDOGYnb5H%2FHDVZ%2F1I1wbQmO70IbrKUeDPmuCJMbULpPeUuqLPPsMQNVC%2FVllwBMGSVApBNmT0Pany%2BLk95KuNM5l5P2S5gTdzoL36YgVKnDm%2FP3fsHPzWBtdvwVYwV4Ze7FTwaSUgZkIEfEhF88JCrxxBCF3d9CHkhK44jvOLcRoXm3UO6iAZBQ0HhXgoJcja%2B%2BuChfUco0iSrERx3aPr3QUdtYi5ASP%2FgvVXZO6DsoewTvfcnoJruSxKjL7J0fmvehxCXEmqayGxcVFIasuPilNnV6gUxo3ORE8eFMBRhMKuIKS6RhkBeuyDs4bvEPZLhpfsoiT6ijURzPgiDdLIfAxlRjul%2FAMMhF7K0g1Sgtyh2h4zLts95GOy4RmbkKfZTfpCKtuPGj5rZICD7UFE9d7K10JefLaoQhgTr8cnijd8wJ19oLmKtRrw0B54Qs62xONWUu%2FZXVf%2FV5lHB4dhCYBkPePp%2Fgr%2Bs%2BMbqmx0d4jfnqBX7zzpqq2DG0qXOtfr1U1h4wKe%2F%2B10jFd%2Bevbj1527zKHs0s%2F4KoMonGOLSECKHwtBYx1nCsNEETUsv4lVGnc0V8Z5XZlQ%2F7DuesLtO9NI%2BlLLTdWPDfp%2BWWFSu6j5tfVlYQk37ibWZGAT82N7V310mCLMxEKcTNxycUYLUlTDRV24qbsLmazpFtqj1AgNAmb5hHh532JtRp9NvTdti8N70eNlaJjlsORD24ZTEMvEuvGRzn95zODjbtmX17CQXhss%2BzDJyum7BjqwAbBy0Dozx2TU5hOUr4x1fDwBWWBfTPVWrviyv98LKI8K%2B9iUgKy8LUGwrn8%2FK0ImX8JwSyDkMvFvbqxZcI9a0yRCPsauc5vSq9UdRh6282%2BLk7h%2FAe67V0NhHnbjscGxVfyR1XVedrhLmNq4du5FtAf%2BHOfTJpT2Ex5XgdLuF8v7PUc0WCQplbdESfpU9xLCH%2BJ42u60tJYAX9%2Blf7GyTuTikw7zVuvPMhknMb3lhKdC&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250105T105650Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVR2265BUPN%2F20250105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=7a4d46e0bdf3f97dea811cf5f1efffa3016272bebda49cdce639b9d6f2268abc",
+        "CodeSha256": "aFd5eRv9uuKVBdQ5ISlh8jJiOHCUTvaDN7OVbUgwGGs=",
+        "CodeSize": 8160778
+    },
+    "LayerArn": "arn:aws:lambda:us-east-1:115507105618:layer:my_custom_lambda_layer",
+    "LayerVersionArn": "arn:aws:lambda:us-east-1:115507105618:layer:my_custom_lambda_layer:1",
+    "Description": "",
+    "CreatedDate": "2024-11-28T10:56:54.492+0000",
+    "Version": 1,
+    "CompatibleRuntimes": [
+        "python3.11"
+    ]
+}
