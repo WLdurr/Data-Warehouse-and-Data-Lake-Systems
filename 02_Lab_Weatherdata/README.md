@@ -45,6 +45,7 @@ Author: Stefan Durrer
 
 - `cloud9 lambda layer.txt`
   - **Functionality**: This text file contains all commands used in the AWS EC2 Cloud9 instance (Linux 2023 environment) that have been used to create the custom lambda layer for the scripts in the folder /wrangling.
+  - **ANNOTATION**: The zip-file of the entire lambda layer needed for the data wrangling is 64MB. Github does not allow an Upload of files larger than 50MB. Upon request, a zipped file of the lambda layer can be provided. With the guide in `cloud9 lambda layer.txt` however, the creation of an identical layer should be possible. 
 
 
 
