@@ -23,7 +23,7 @@ Author: Stefan Durrer
   - `rds_lambda_layer.zip`
     - **Functionality**: Zipped lambda layer that is needed for all lambda functions responsible for the data transfer from data lake (s3 buckets) to the data warehouse PostgresRDS.
   - `Cloud9 lambda layer.txt`
-    - **Functionality**: Cloud 9 Console code and last output for the lambda layer creation in Amazon Linux 2023 environment
+    - **Functionality**: Cloud 9 Console code for the lambda layer creation in Amazon Linux 2023 environment
 
 
 
