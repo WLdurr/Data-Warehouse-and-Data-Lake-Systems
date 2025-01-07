@@ -1,9 +1,8 @@
-### Structure
-
-In this folder, all lambda functions and lambda layers for the Lab that handles weather data import and transfer to all other labs that require this data are listed.
 
 
 # 02\_Lab\_Weatherdata/
+
+Author: Stefan Durrer
 
 ## File Structure
 
