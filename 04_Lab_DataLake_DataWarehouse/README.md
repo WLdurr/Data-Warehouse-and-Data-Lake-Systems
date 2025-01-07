@@ -15,7 +15,7 @@ Author: Stefan Durrer
     - **Lambda File**: `dwlrdsmodeloutput-08400da9-0b99-4228-871b-a42edc0e0b01.zip`
   - `weather_forecast_to_rds.py`
     - **Functionality**: Transforms forecast data (timestamp conversion) ans loads data into the forecast_weather table in the RDS. Checks for duplicates. Updates each existing unique entry and inserts if not already present. Unique constraint is a combination of airport_iata_code and timestamp. 
-    - **Lambda File**: `rdsforecastweather-079d6ded-6c8b-4ced-bc3e-f0118f8cc0ca.zip`
+    - **Lambda File**: `rdsforecastweather-f5a610a4-17f9-4836-821f-563abd82a566.zip`
 
 ---
 
