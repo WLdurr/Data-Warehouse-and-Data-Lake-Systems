@@ -2,8 +2,7 @@
 # Only one file is in the s3 bucket that gets overwritten each day
 # this file is being pushed to RDS
 # to make the code run, a custom lambda layer with packages psycopg2 is required (available in repo)
-# this code runs once per day rate(1 day)
-
+# this code runs every 3 hours
 import json
 import boto3
 import psycopg2
