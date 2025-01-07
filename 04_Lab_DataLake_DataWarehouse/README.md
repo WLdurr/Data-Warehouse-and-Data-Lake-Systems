@@ -9,20 +9,21 @@ Author: Stefan Durrer
 - **Scripts**:
   - `live_flight_to_rds.py`
     - **Functionality**: Transforms live aviation data. Loads data into flight_info table in RDS. Checks for unique constraints in RDS (combination of flight_number, airport_iata_code and scheduled_departure_timestamp) and updates if this flight is already present. Inserts if not.
-    - **Lambda File**: ``
+    - **Lambda File**: `drsliveflight-f30e84ec-34db-4910-88b1-6448297b430f.zip`
   - `sagemaker_output_to_rds.py`
     - **Functionality**: Loads data from prediciton model into the corresponding table in the RDS.
-    - **Lambda File**: ``
+    - **Lambda File**: `dwlrdsmodeloutput-08400da9-0b99-4228-871b-a42edc0e0b01.zip`
   - `weather_forecast_to_rds.py`
     - **Functionality**: Transforms forecast data (timestamp conversion) ans loads data into the forecast_weather table in the RDS. Checks for duplicates. Updates each existing unique entry and inserts if not already present. Unique constraint is a combination of airport_iata_code and timestamp. 
-    - **Lambda File**: ``
+    - **Lambda File**: `rdsforecastweather-079d6ded-6c8b-4ced-bc3e-f0118f8cc0ca.zip`
 
 ---
 
 - **Additional Material**:
   - `rds_lambda_layer.zip`
     - **Functionality**: Zipped lambda layer that is needed for all lambda functions responsible for the data transfer from data lake (s3 buckets) to the data warehouse PostgresRDS.
-
+  - `Cloud9 lambda layer.txt`
+    - **Functionality**: Cloud 9 Console code and last output for the lambda layer creation in Amazon Linux 2023 environment
 
 
 
