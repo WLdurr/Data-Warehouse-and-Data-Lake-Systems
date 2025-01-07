@@ -9,7 +9,7 @@ Author: Stefan Durrer
 - **Scripts**:
   - `live_flight_to_rds.py`
     - **Functionality**: Transforms live aviation data. Loads data into flight_info table in RDS. Checks for unique constraints in RDS (combination of flight_number, airport_iata_code and scheduled_departure_timestamp) and updates if this flight is already present. Inserts if not.
-    - **Lambda File**: `drsliveflight-f30e84ec-34db-4910-88b1-6448297b430f.zip`
+    - **Lambda File**: `drsliveflight-444abf56-77cf-4dc6-b5d4-1e21a1878ec7.zip`
   - `sagemaker_output_to_rds.py`
     - **Functionality**: Loads data from prediciton model into the corresponding table in the RDS.
     - **Lambda File**: `dwlrdsmodeloutput-08400da9-0b99-4228-871b-a42edc0e0b01.zip`
