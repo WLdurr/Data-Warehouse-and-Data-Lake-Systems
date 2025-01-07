@@ -71,6 +71,7 @@ To set up the system, follow these sequential steps. This guide will help you im
 - Each folder contains **multiple scripts** designed for a specific part of the setup process. Review the structure and purpose of the scripts in each folder before proceeding.
 - Execute the scripts **sequentially** within each folder to ensure proper configuration.
 - Ensure that the necessary **IAM roles and permissions** are assigned to each Lambda function for it to run properly.
+- This guide solely explains the successful setup of the lambda functions as we developed them. Make sure to set up additional required services, such as s3, SageMaker and Amazon RDS
 
 By following these steps, you can import and run all Lambda scripts successfully to set up your system.
 
