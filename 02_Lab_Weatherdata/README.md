@@ -45,7 +45,7 @@ In this folder, all lambda functions and lambda layers for the Lab that handles 
 ---
 
 - `cloud9 envoronment.txt`
-  -**Functionality**: This text file contains all commands used in the AWS EC2 Cloud9 instance (Linux 2023 environment) that have been used to create the custom lambda layer for the scripts in the folder /wrangling.
+  - **Functionality**: This text file contains all commands used in the AWS EC2 Cloud9 instance (Linux 2023 environment) that have been used to create the custom lambda layer for the scripts in the folder /wrangling.
 
 
 
