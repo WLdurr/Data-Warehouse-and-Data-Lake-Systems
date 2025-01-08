@@ -30,8 +30,8 @@ To set up the system, follow these sequential steps. This guide will help you im
 1. Start by downloading all the necessary files from this repository. Each Lambda script is located in one of the following folders:
    - **01_Lab_Flightdata**
    - **02_Lab_Weatherdata**
-   - **03_ConfigureServices**
-   - **04_FinalizeDeployment**
+   - **03_Lab_PredictionModel**
+   - **04_Lab_DataLake_DataWarehouse**
 
    Each folder contains **multiple scripts**. The structure of the scripts and their intended purpose can be found within each folder. It is essential to proceed sequentially through the folders and scripts to set up the system correctly.
 
