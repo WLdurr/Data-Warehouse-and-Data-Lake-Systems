@@ -62,10 +62,10 @@ To set up the system, follow these sequential steps. This guide will help you im
 
 7. **Repeat for Other Scripts**:
    - Repeat the steps above for each Lambda script in the repository, ensuring they are executed in the correct sequence:
-     1. **01_PrepareEnvironment**: Complete all scripts in this folder first.
-     2. **02_SetupDatabase**: Proceed to the scripts in this folder.
-     3. **03_ConfigureServices**: Configure services using the scripts in this folder.
-     4. **04_FinalizeDeployment**: Finalize the setup with the scripts in this folder.
+     1. **01_Lab_Flightdata**: Complete all scripts in this folder first.
+     2. **02_Lab_Weatherdata**: Proceed to the scripts in this folder.
+     3. **03_Lab_PredictionModel**: Configure services using the scripts in this folder.
+     4. **04_Lab_DataLake_DataWarehouse**: Finalize the setup with the scripts in this folder.
 
 ### Important Notes
 - Each folder contains **multiple scripts** designed for a specific part of the setup process. Review the structure and purpose of the scripts in each folder before proceeding.
