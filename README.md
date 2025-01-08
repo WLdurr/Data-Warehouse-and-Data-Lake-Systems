@@ -62,9 +62,9 @@ To set up the system, follow these sequential steps. This guide will help you im
 
 7. **Repeat for Other Scripts**:
    - Repeat the steps above for each Lambda script in the repository, ensuring they are executed in the correct sequence:
-     1. **01_Lab_Flightdata**: Complete all scripts in this folder first.
-     2. **02_Lab_Weatherdata**: Proceed to the scripts in this folder.
-     3. **03_Lab_PredictionModel**: Configure services using the scripts in this folder.
+     1. **01_Lab_Flightdata**: Complete all scripts in this folder.
+     2. **02_Lab_Weatherdata**: Proceed to the scripts in this folder. This order is recommended, but starting with weather data is also possible.
+     3. **03_Lab_PredictionModel**: Configure the SageMaker model and set up the functions to fetch data and send it to the Data Lake.
      4. **04_Lab_DataLake_DataWarehouse**: Finalize the setup with the scripts in this folder.
 
 ### Important Notes
